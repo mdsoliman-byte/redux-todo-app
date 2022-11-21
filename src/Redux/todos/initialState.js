@@ -5,7 +5,7 @@ export const initialState = [{
 
 }, {
     _id: 2,
-    completed: true,
+    completed: false,
     text: "This IS REACT REDUX 2 ",
     color: 'red'
 

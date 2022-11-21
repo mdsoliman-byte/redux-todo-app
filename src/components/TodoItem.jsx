@@ -5,7 +5,11 @@ const TodoItem = ({ todo }) => {
   const { text, id, completed, color } = todo;
   return (
     <div class="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
-      <div class="rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-green-500 focus-within:border-green-500">
+      <div
+        className={`rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 ${
+          completed && "border-green-500 focus-within:border-green-500"
+        }`}
+      >
         <input
           type="checkbox"
           checked={completed}
