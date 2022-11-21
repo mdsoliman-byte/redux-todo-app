@@ -13,8 +13,6 @@ export const colorChanged = (color, changeType) => {
 export const statusChange = (status) => {
     return {
         type: STATUSCHANGE,
-        payload: {
-            status
-        }
+        payload: status
     }
 }

@@ -51,7 +51,7 @@ const reducers = (state = initialState, action) => {
         case CLEARCOMPLETED:
             return state.filter(todo => !todo.completed)
 
-        default: break;
+        default: return state;
     }
 
 
