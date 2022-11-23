@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { statusChange } from "../Redux/filters/action";
 const todoFormater = (no_of_todos) => {
   switch (no_of_todos) {
     case 0:
@@ -12,16 +13,40 @@ const todoFormater = (no_of_todos) => {
 };
 const Footer = () => {
   const todos = useSelector((state) => state.todos);
+  const filters = useSelector((state) => state.filters);
+  const dispatch = useDispatch();
+
   const todoRemaining = todos.filter((todo) => !todo.completed).length;
+
+  const handelFilter = (status) => {
+    dispatch(statusChange(status));
+  };
+  const { color, status } = filters;
+
   return (
     <div class="mt-4 flex justify-between text-xs text-gray-500">
       <p>{todoFormater(todoRemaining)} left</p>
       <ul class="flex space-x-1 items-center text-xs">
-        <li class="cursor-pointer font-bold">All</li>
+        <li
+          className={`cursor-pointer ${status === "All" && "font-bold"}`}
+          onClick={() => handelFilter("All")}
+        >
+          All
+        </li>
         <li>|</li>
-        <li class="cursor-pointer">Incomplete</li>
+        <li
+          className={`cursor-pointer ${status === "Incomplete" && "font-bold"}`}
+          onClick={() => handelFilter("Incomplete")}
+        >
+          Incomplete
+        </li>
         <li>|</li>
-        <li class="cursor-pointer">Complete</li>
+        <li
+          className={`cursor-pointer ${status === "Complete" && "font-bold"}`}
+          onClick={() => handelFilter("Complete")}
+        >
+          Complete
+        </li>
         <li></li>
         <li></li>
         <li class="h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer bg-green-500"></li>
