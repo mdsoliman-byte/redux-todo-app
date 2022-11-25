@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { statusChange } from "../Redux/filters/action";
+import { statusChange, colorChanged } from "../Redux/filters/action";
 const todoFormater = (no_of_todos) => {
   switch (no_of_todos) {
     case 0:
@@ -13,7 +13,9 @@ const todoFormater = (no_of_todos) => {
 };
 const Footer = () => {
   const todos = useSelector((state) => state.todos);
+
   const filters = useSelector((state) => state.filters);
+
   const dispatch = useDispatch();
 
   const todoRemaining = todos.filter((todo) => !todo.completed).length;
@@ -22,6 +24,7 @@ const Footer = () => {
     dispatch(statusChange(status));
   };
   const { color, status } = filters;
+  // console.log(state);
 
   return (
     <div class="mt-4 flex justify-between text-xs text-gray-500">
