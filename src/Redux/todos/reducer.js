@@ -13,7 +13,9 @@ const reducers = (state = initialState, action) => {
             return [
                 ...state,
                 {
-                    _id: nextTodoId(state)
+                    _id: nextTodoId(state),
+                    text: action.payload,
+                    completed: false,
                 }
             ]
         case TOGGLED:

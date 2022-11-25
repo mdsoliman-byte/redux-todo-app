@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import notes from "../images/notes.png";
 import double from "../images/double-tick.png";
 import plus from "../images/plus.png";
+import { added } from "../Redux/todos/action";
+import { useDispatch } from "react-redux";
+
 const Header = () => {
+  const [input, setInput] = useState("");
+  const dispatch = useDispatch();
+  const handelInput = (e) => {
+    setInput(e.target.value);
+  };
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    if (input === "") {
+      console.log("please add some text");
+    } else {
+      dispatch(added(input));
+      setInput("");
+    }
+  };
   return (
     <div>
-      <form className="flex items-center bg-gray-100 px-4 py-4 rounded-md">
+      <form
+        className="flex items-center bg-gray-100 px-4 py-4 rounded-md"
+        onSubmit={handelSubmit}
+      >
         <img src={notes} className="w-6 h-6" alt="Add todo" />
         <input
           type="text"
           placeholder="Type your todo"
           className="w-full text-lg px-4 py-1 border-none outline-none bg-gray-100 text-gray-500"
+          value={input}
+          onChange={handelInput}
         />
         <button
           type="submit"
