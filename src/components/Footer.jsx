@@ -16,6 +16,7 @@ const Footer = () => {
 
   const filters = useSelector((state) => state.filters);
 
+  const { color, status } = filters;
   const dispatch = useDispatch();
 
   const todoRemaining = todos.filter((todo) => !todo.completed).length;
@@ -23,8 +24,13 @@ const Footer = () => {
   const handelFilter = (status) => {
     dispatch(statusChange(status));
   };
-  const { color, status } = filters;
-  // console.log(state);
+  const handelColorChange = (colors) => {
+    if (color.includes(colors)) {
+      dispatch(colorChanged(colors, "remove"));
+    } else {
+      dispatch(colorChanged(colors, "added"));
+    }
+  };
 
   return (
     <div class="mt-4 flex justify-between text-xs text-gray-500">
@@ -52,9 +58,24 @@ const Footer = () => {
         </li>
         <li></li>
         <li></li>
-        <li class="h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer bg-green-500"></li>
-        <li class="h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer"></li>
-        <li class="h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer"></li>
+        <li
+          className={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer ${
+            color.includes("green") && "bg-green-500"
+          }`}
+          onClick={() => handelColorChange("green")}
+        ></li>
+        <li
+          className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer ${
+            color.includes("red") && "bg-red-500"
+          }`}
+          onClick={() => handelColorChange("red")}
+        ></li>
+        <li
+          className={`h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer ${
+            color.includes("yellow") && "bg-yellow-500"
+          }`}
+          onClick={() => handelColorChange("yellow")}
+        ></li>
       </ul>
     </div>
   );
