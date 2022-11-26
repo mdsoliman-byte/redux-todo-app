@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import notes from "../images/notes.png";
 import double from "../images/double-tick.png";
 import plus from "../images/plus.png";
-import { added } from "../Redux/todos/action";
+import { added, allCompleted } from "../Redux/todos/action";
 import { useDispatch } from "react-redux";
 
 const Header = () => {
@@ -19,6 +19,9 @@ const Header = () => {
       dispatch(added(input));
       setInput("");
     }
+  };
+  const completeAllTask = () => {
+    dispatch(allCompleted());
   };
   return (
     <div>
@@ -43,7 +46,7 @@ const Header = () => {
       <ul className="flex justify-between my-4 text-xs text-gray-500">
         <li className="flex space-x-1 cursor-pointer">
           <img className="w-4 h-4" src={double} alt="Complete" />
-          <span>Complete All Tasks</span>
+          <span onClick={completeAllTask}>Complete All Tasks</span>
         </li>
         <li className="cursor-pointer">Clear completed</li>
       </ul>
